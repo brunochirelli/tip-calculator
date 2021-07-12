@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import TipSelect from '../components/TipSelect';
 import { updateTip } from '../store/tip-percentage/actions';
 

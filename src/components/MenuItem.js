@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Button,
@@ -7,6 +9,7 @@ import {
   Input,
   Label
 } from '@twilio-paste/core';
+import { useDispatch } from 'react-redux';
 
 import { toCurrency } from '../utilities';
 
@@ -20,6 +23,15 @@ export const MenuItem = ({
   updateQuantity = () => {},
   remove = () => {}
 }) => {
+  const [newQuantity, setNewQuantity] = useState(quantity);
+
+  const handleUpdateQuantity = (e) => {
+    updateQuantity(e.target.value);
+  };
+  const handleUpdatePrice = (e) => {
+    updatePrice(e.target.value);
+  };
+
   return (
     <Card marginTop="space40">
       <Heading variant="heading30" as="h3">
@@ -31,18 +43,18 @@ export const MenuItem = ({
           <Input
             id={`$item-${uuid}-price`}
             insertBefore={<div>$</div>}
-            value={price}
+            defaultValue={price}
             type="number"
-            onChange={(event) => updatePrice(event.target.value)}
+            onChange={handleUpdatePrice}
           />
         </Box>
         <Box padding="space20">
           <Label htmlFor={`$item-${uuid}-quantity`}>Quantity</Label>
           <Input
             id={`$item-${uuid}-quantity`}
-            value={quantity}
+            defaultValue={quantity}
             type="number"
-            onChange={(event) => updateQuantity(event.target.value)}
+            onChange={handleUpdateQuantity}
           />
         </Box>
         <Box padding="space20" textAlign="right" width="100%">

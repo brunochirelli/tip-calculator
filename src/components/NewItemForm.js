@@ -1,7 +1,18 @@
-import { Box, Button, Input, Label } from '@twilio-paste/core';
 import { useState } from 'react';
 
+import { Box, Button, Input, Label } from '@twilio-paste/core';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+
+import { addNewItem } from '../store/items/actions';
+
 export const NewItemForm = ({ onSubmit }) => {
+  /**
+   * Neste componente, utilizamos o connect() do Redux para
+   * isolar a store com suas actions para fora da UI e
+   * apenas acabando por consumi-las via um HOC (connect) do
+   * próprio Redux.
+   */
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
 
@@ -17,6 +28,9 @@ export const NewItemForm = ({ onSubmit }) => {
     if (typeof onSubmit === 'function') {
       onSubmit(name, price);
     }
+
+    // Alteramos para mapDispatchToProps()
+    // dispatch(addNewItem(name, price));
 
     setName('');
     setPrice(0);
@@ -38,17 +52,17 @@ export const NewItemForm = ({ onSubmit }) => {
           <Label htmlFor="item-price">Price</Label>
           <Input
             id="item-price"
-            type="number"
             insertBefore={<div>$</div>}
-            value={price}
+            type="number"
             onChange={(event) => setPrice(event.target.value)}
+            value={price}
           />
         </Box>
         <Button
           disabled={!isValid()}
+          fullWidth
           onClick={handleSubmit}
           type="submit"
-          fullWidth
           variant="primary"
         >
           🍳 Add Item
@@ -56,6 +70,14 @@ export const NewItemForm = ({ onSubmit }) => {
       </form>
     </Box>
   );
+};
+
+NewItemForm.propTypes = {
+  /**
+   * Essa função é recebida via mapDispatchToProps usando o
+   * Connect API do Redux.
+   */
+  onSubmit: PropTypes.func
 };
 
 export default NewItemForm;

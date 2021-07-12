@@ -1,4 +1,5 @@
 import { combineReducers, createStore } from 'redux';
+
 import itemsReducer from './items/reducer';
 import tipPercentageReducer from './tip-percentage/reducer';
 
