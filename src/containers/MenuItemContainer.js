@@ -2,11 +2,15 @@ import { connect } from 'react-redux';
 
 import MenuItem from '../components/MenuItem';
 import { removeItem, updateItem, updatePrice } from '../store/items/actions';
+import { selectItemTotal } from '../store/items/selectors';
+
+/**
+ * Estamos fazendo habilmente o separation of concerns
+ */
 
 const mapStateToProps = (state, ownProps) => {
-  // sem necessidade de passar ownProps
   return {
-    total: ownProps.quantity * ownProps.price
+    total: selectItemTotal(state, ownProps)
   };
 };
 
