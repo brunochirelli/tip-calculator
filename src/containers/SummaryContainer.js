@@ -1,19 +1,21 @@
 import { connect } from 'react-redux';
 
 import { Summary } from '../components/Summary';
+import {
+  selectSubtotal,
+  selectTipAmount,
+  selectTotal
+} from '../store/items/selectors';
 
 const mapStateToProps = (state) => {
-  let subtotal = state.items.reduce(
-    (prev, curr) => prev + curr.price * curr.quantity,
-    0
-  );
-
-  let tipAmount = subtotal * (state.tipPercentage / 100);
+  const subtotal = selectSubtotal(state);
+  const tipAmount = selectTipAmount(state);
+  const total = selectTotal(state);
 
   return {
     subtotal,
     tipAmount,
-    total: subtotal + tipAmount
+    total
   };
 };
 
