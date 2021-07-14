@@ -1,7 +1,7 @@
 export const ITEM_ADDED = 'ITEM_ADDED';
 export const ITEM_REMOVED = 'ITEM_REMOVED';
-export const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
-export const UPDATE_PRICE = 'UPDATE_PRICE';
+export const ITEM_QUANTITY_UPDATED = 'ITEM_QUANTITY_UPDATED';
+export const ITEM_PRICE_UPDATED = 'ITEM_PRICE_UPDATED';
 
 export const addNewItem = (name, price) => ({
   type: ITEM_ADDED,
@@ -19,7 +19,7 @@ export const removeItem = (uuid) => ({
 });
 
 export const updateItem = (uuid, quantity) => ({
-  type: UPDATE_QUANTITY,
+  type: ITEM_QUANTITY_UPDATED,
   payload: {
     uuid,
     quantity
@@ -27,7 +27,7 @@ export const updateItem = (uuid, quantity) => ({
 });
 
 export const updatePrice = (uuid, price) => ({
-  type: UPDATE_PRICE,
+  type: ITEM_PRICE_UPDATED,
   payload: {
     uuid,
     price
